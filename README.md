@@ -1,2 +1,0 @@
-# AiGateway-DDD-Hexagonal
- 
