@@ -1,9 +1,8 @@
 import pytest
-from completion_context.domain.value_objects.model_name import ModelName
+from completion_context.completion_context.domain.value_objects.model_name import ModelName
 
 
 def test_valid_model_names() -> None:
-    """مدل‌های معتبر باید بدون خطا ساخته بشن"""
     valid_names = [
         "gpt-4o",
         "claude-3-opus",
