@@ -3,8 +3,9 @@ from completion_context.domain.value_objects.model_name import ModelName
 
 
 def test_valid_model_names() -> None:
+    """مدل‌های معتبر باید بدون خطا ساخته بشن"""
     valid_names = [
-        "gpt-40",
+        "gpt-4o",
         "claude-3-opus",
         "gemini-1.5-pro",
         "llama-3-70b",
@@ -14,25 +15,26 @@ def test_valid_model_names() -> None:
     for name in valid_names:
         model = ModelName(name)
         assert str(model) == name
-        assert repr(model) == f"ModelName({name})"
+        assert repr(model) == f"ModelName('{name}')"
 
 
-def test_invalid_model_names() -> None:
+def test_invalid_model_name_raises_error() -> None:
     with pytest.raises(ValueError) as exc_info:
-        ModelName("gpt")
+        ModelName("gpt-999-fake")
 
-    assert "Invalid model name: invalid_model_name" in str(exc_info.value)
+    assert "Invalid model name" in str(exc_info.value)
 
 
-def test_model_immutable() -> None:
-    model = ModelName("gpt-40")
+def test_model_name_is_immutable() -> None:
+    model = ModelName("gpt-4o")
+
     with pytest.raises(AttributeError):
-        model.value = "claude"
+        model.value = "something-else"
 
 
-def test_two_same_model_are_equal() -> None:
-    a = ModelName["gpt-40"]
-    b = ModelName["gpt-40"]
+def test_two_same_model_names_are_equal() -> None:
+    a = ModelName("gpt-4o")
+    b = ModelName("gpt-4o")
 
     assert a == b
     assert hash(a) == hash(b)
