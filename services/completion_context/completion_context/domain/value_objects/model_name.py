@@ -18,10 +18,10 @@ class ModelName:
 
     def __post_init__(self) -> None:
         if self.value not in _VALID_MODELS:
-            raise ValueError(f"Invalid model name: {self.value}")
+            raise ValueError(f"Invalid model name: {self.value!r}")
 
     def __str__(self) -> str:
         return self.value
 
     def __repr__(self) -> str:
-        return f"ModelName({self.value})"
+        return f"ModelName('{self.value}')"
