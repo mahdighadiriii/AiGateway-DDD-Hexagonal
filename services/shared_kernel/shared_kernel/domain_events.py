@@ -1,17 +1,15 @@
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Any
 
 from .core import EntityId, Timestamp
 
 
-@dataclass(frozen=True)
-class DomainEvent(ABC):
+@dataclass(frozen=True, kw_only=True)
+class DomainEvent:
     occurred_at: Timestamp = field(default_factory=Timestamp.now)
 
-    @abstractmethod
     def _extra_dict_fields(self) -> dict[str, Any]:
         return {}
 
