@@ -14,7 +14,7 @@ class Tokens:
         if self.value < 0:
             raise ValueError("Tokens cannot be negative")
         if self.value > MAX_TOKENS:
-            raise ValueError("Tokens cannot be more than 1M")
+            raise ValueError("Tokens cannot exceed 1,000,000")
 
     def __add__(self, other: object) -> Tokens:
         if not isinstance(other, Tokens):
@@ -26,7 +26,7 @@ class Tokens:
             return NotImplemented
         result = self.value - other.value
         if result < 0:
-            raise ValueError("Tokens cannot be negative")
+            raise ValueError("Token subtraction cannot result in negative value")
         return Tokens(result)
 
     def __lt__(self, other: object) -> bool:
